@@ -26,7 +26,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
                   fontSize: 20,
                 ),
               ),
-            )
+            ),
           ],
         ));
   }
