@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_app/answer.dart';
+import 'package:quiz_app/data/questions.dart';
 
 class QuestionsWidget extends StatefulWidget {
   const QuestionsWidget({super.key});
@@ -8,6 +10,8 @@ class QuestionsWidget extends StatefulWidget {
     return _QuestionsWidgetState();
   }
 }
+
+var currentQuestion = 0;
 
 class _QuestionsWidgetState extends State<QuestionsWidget> {
   @override
@@ -19,7 +23,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "This is the question",
+              questions[currentQuestion].text,
               style: GoogleFonts.lato(
                 textStyle: const TextStyle(
                   color: Colors.lightBlueAccent,
@@ -27,6 +31,9 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
                 ),
               ),
             ),
+            ...questions[currentQuestion]
+                .shuffledOptions()
+                .map((answer) => AnswerWidget(() {}, answer))
           ],
         ));
   }
