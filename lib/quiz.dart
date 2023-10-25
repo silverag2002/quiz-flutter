@@ -10,10 +10,16 @@ class QuizWidget extends StatefulWidget {
   }
 }
 
+final ansArray = [];
+
+void addDataToArray(String text) {
+  ansArray.add(text);
+}
+
 class _QuizWidgetState extends State<QuizWidget> {
   void onPressed() {
     setState(() {
-      activeScreen = const QuestionsWidget();
+      activeScreen = const QuestionsWidget(addDataToArray);
     });
   }
 

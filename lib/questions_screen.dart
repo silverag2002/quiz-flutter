@@ -4,7 +4,8 @@ import 'package:quiz_app/answer.dart';
 import 'package:quiz_app/data/questions.dart';
 
 class QuestionsWidget extends StatefulWidget {
-  const QuestionsWidget({super.key});
+  const QuestionsWidget(this.addDataToArray, {super.key});
+  final void Function(String text) addDataToArray;
   @override
   State<QuestionsWidget> createState() {
     return _QuestionsWidgetState();
@@ -14,6 +15,13 @@ class QuestionsWidget extends StatefulWidget {
 var currentQuestion = 0;
 
 class _QuestionsWidgetState extends State<QuestionsWidget> {
+  void ansSelected(String ans) {
+    widget.addDataToArray(ans);
+    setState(() {
+      currentQuestion++;
+    });
+  }
+
   @override
   Widget build(context) {
     return SizedBox(
@@ -33,7 +41,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
             ),
             ...questions[currentQuestion]
                 .shuffledOptions()
-                .map((answer) => AnswerWidget(() {}, answer))
+                .map((answer) => AnswerWidget(ansSelected, answer))
           ],
         ));
   }
